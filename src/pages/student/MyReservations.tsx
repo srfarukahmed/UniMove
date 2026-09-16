@@ -1,0 +1,8 @@
+import { Eye, QrCode, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Badge from '../../components/common/Badge';
+import ConfirmDialog from '../../components/common/ConfirmDialog';
+import PageHeader from '../../components/common/PageHeader';
+import { reservations as seed } from '../../data/mock';
+export default function MyReservations(){ const [items,setItems]=useState(seed); const [removeId,setRemoveId]=useState<number|null>(null); const cancel=()=>{if(removeId) setItems(v=>v.map(r=>r.id===removeId?{...r,status:'cancelled' as const}:r)); setRemoveId(null)}; return <><PageHeader title="My Reservations" subtitle="View, manage and access your shuttle bookings."/><section className="card"><div className="table-wrap"><table><thead><tr><th>Reservation</th><th>Route</th><th>Date & Time</th><th>Bus / Seat</th><th>Status</th><th>Actions</th></tr></thead><tbody>{items.map(r=><tr key={r.id}><td><b>{r.reservationNo}</b></td><td>{r.route}</td><td>{r.date}<br/><span className="muted">{r.time}</span></td><td>{r.bus} / {r.seat}</td><td><Badge value={r.status}/></td><td><div className="row-actions"><Link className="icon-btn" to="/student/qr-pass"><QrCode size={15}/></Link><button className="icon-btn"><Eye size={15}/></button>{r.status==='reserved'&&<button className="icon-btn" onClick={()=>setRemoveId(r.id)}><Trash2 size={15}/></button>}</div></td></tr>)}</tbody></table></div></section><ConfirmDialog open={removeId!==null} title="Cancel reservation" message="This will cancel the selected seat reservation. You can make a new reservation later if seats remain available." onConfirm={cancel} onCancel={()=>setRemoveId(null)}/></> }

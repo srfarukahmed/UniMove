@@ -1,0 +1,5 @@
+import { QRCodeSVG } from 'qrcode.react';
+import type { Reservation } from '../../types/reservation';
+export default function QRBoardingCard({ reservation }: { reservation:Reservation }){
+ return <div className="qr-card"><div className="qr-card-top"><span className="brand compact">Uni<span>Move</span></span><span className={`badge ${reservation.status}`}>{reservation.status}</span></div><div className="qr-body"><QRCodeSVG value={JSON.stringify({reservation:reservation.reservationNo,trip:reservation.tripId,seat:reservation.seat})} size={164} level="H" includeMargin/><div className="qr-info"><small>BOARDING PASS</small><h2>{reservation.route}</h2><div className="qr-grid"><span><small>Bus</small><b>{reservation.bus}</b></span><span><small>Seat</small><b>{reservation.seat}</b></span><span><small>Date</small><b>{reservation.date}</b></span><span><small>Time</small><b>{reservation.time}</b></span></div><p>{reservation.reservationNo}</p></div></div><div className="qr-note">Present this QR code at boarding. Do not share your pass with others.</div></div>;
+}

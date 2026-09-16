@@ -1,0 +1,2 @@
+import api from './api';
+export const studentService = { getDashboard:()=>api.get('/student/dashboard'), searchShuttles:(params:Record<string,string>)=>api.get('/student/shuttles',{params}), getSchedules:()=>api.get('/student/schedules'), notifications:()=>api.get('/student/notifications'), feedback:(payload:unknown)=>api.post('/student/feedback',payload), reportIssue:(payload:unknown)=>api.post('/student/incidents',payload) };
