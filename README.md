@@ -40,3 +40,25 @@ Dashboard, student CRUD, driver CRUD, bus CRUD, route CRUD, stop CRUD, schedules
 - responsive light/dark theme
 
 The current UI uses realistic mock data so it is fully navigable as a standalone frontend. Replace mock data calls with the service layer when the Node/Express backend is available.
+
+## Vercel Deployment
+
+Framework preset: Vite
+
+Build command:
+```
+npm run build
+```
+
+Output directory:
+```
+dist
+```
+
+Environment variables:
+```
+VITE_API_BASE_URL=your_backend_api_url
+VITE_SOCKET_URL=your_socket_server_url
+```
+
+The included vercel.json enables SPA routing so direct navigation to React routes works after deployment.
